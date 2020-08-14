@@ -5,16 +5,16 @@
 <template>
   <div class="my-app">
     <counter-view :counter="counter"></counter-view>
-    <button @click="increment(1)">Increment</button>
-    <button @click="increment(-1)">Decrement</button>
+    <counter-controller @onIncrement="handleIncrement($event)"></counter-controller>
   </div>
 </template>
 
 <script>
   import CounterView from './components/CounterView';
+  import CounterController from './components/CounterController';
   export default {
     components: {
-      CounterView
+      CounterView, CounterController
     },
     data() {
       return {
@@ -22,7 +22,7 @@
       }
     },
     methods: {
-      increment(inc) {
+      handleIncrement(inc) {
         this.counter += inc
       }
     }
