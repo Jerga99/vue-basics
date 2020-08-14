@@ -7,9 +7,10 @@
 
 <script>
   export default {
+    emits: ['on-increment'],
     methods: {
       increment(inc) {
-        this.$emit('onIncrement', inc)
+        this.$emit('on-increment', inc)
       }
     }
   }

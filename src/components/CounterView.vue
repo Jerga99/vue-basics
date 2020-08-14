@@ -3,7 +3,9 @@
 
 
 <template>
-  <h1>{{counter}}</h1>
+  <div class="counter-view">
+    <h1>{{counter}}</h1>
+  </div>
 </template>
 
 <script>
@@ -18,3 +20,11 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+  .counter-view {
+    h1 {
+      font-size: 70px;
+    }
+  }
+</style>
