@@ -4,7 +4,7 @@
       v-for="resource in resources"
       :key="resource._id"
       @click="onItemClick(resource)"
-      class="list-group-item d-flex justify-content-between lh-condensed resource-list-item">
+      :class="`${activeItemClass(resource)} list-group-item d-flex justify-content-between lh-condensed resource-list-item`">
       <div>
         <h6 class="my-0">{{resource.title}}</h6>
         <small class="text-muted">{{resource.description}}</small>
@@ -20,13 +20,22 @@ export default {
     resources: {
       type: Array,
       default: () => []
-    }
+    },
+    activeId: String
   },
   emit: ['on-item-click'],
+  computed: {
+    activeItemClass() {
+      return resource => resource._id === this.activeId ? 'is-active' : ''
+    }
+  },
   methods: {
     onItemClick(resource) {
       this.$emit('on-item-click', resource)
-    }
+    },
+    // activeItemClass(resource) {
+    //   return resource._id === this.activeId ? 'is-active' : ''
+    // }
   }
 }
 </script>
@@ -41,5 +50,9 @@ export default {
         background-color: #f3f3f3;
       }
     }
+  }
+
+  .is-active {
+     background-color: #f3f3f3;
   }
 </style>
