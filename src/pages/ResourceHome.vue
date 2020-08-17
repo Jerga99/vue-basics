@@ -17,7 +17,8 @@
         <h4 class="mb-3">Resource
           <button
             @click="toggleView"
-            class="btn btn-sm btn-success">Toggle</button>
+            :class="`btn btn-sm ${toggleBtnClass}`">
+            {{isDetailView ? 'Update' : 'Detail'}}</button>
         </h4>
         <resource-detail v-if="isDetailView" />
         <resource-update v-else />
@@ -73,6 +74,9 @@
       resourcesLength() {
         console.log('Calling computed property')
         return this.resources.length
+      },
+      toggleBtnClass() {
+        return this.isDetailView ? 'btn-warning' : 'btn-primary'
       }
     },
     methods: {
