@@ -5,7 +5,7 @@
       <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-muted">Your Resources</span>
-          <span class="badge badge-secondary badge-pill">6</span>
+          <span class="badge badge-secondary badge-pill">{{resourcesLength}}</span>
         </h4>
         <resource-search />
         <resource-list :resources="resources" />
@@ -65,6 +65,20 @@
             link: ''
           }
         ]
+      }
+    },
+    computed: {
+      // it will be re-evaluated every time reactive dependency will change
+      resourcesLength() {
+        console.log('Calling computed property')
+        return this.resources.length
+      }
+    },
+    methods: {
+      // it will be re-evaluated every
+      getResourceLength() {
+        console.log('Calling a method')
+        return this.resources.length
       }
     }
   }
