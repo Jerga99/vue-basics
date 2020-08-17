@@ -3,6 +3,7 @@
     <li
       v-for="resource in resources"
       :key="resource._id"
+      @click="onItemClick(resource)"
       class="list-group-item d-flex justify-content-between lh-condensed resource-list-item">
       <div>
         <h6 class="my-0">{{resource.title}}</h6>
@@ -19,6 +20,12 @@ export default {
     resources: {
       type: Array,
       default: () => []
+    }
+  },
+  emit: ['on-item-click'],
+  methods: {
+    onItemClick(resource) {
+      this.$emit('on-item-click', resource)
     }
   }
 }

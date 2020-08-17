@@ -8,19 +8,24 @@
           <span class="badge badge-secondary badge-pill">{{resourcesLength}}</span>
         </h4>
         <resource-search />
-        <resource-list :resources="resources" />
+        <resource-list
+          :resources="resources"
+          @on-item-click="selectResource"
+        />
         <button
           @click="addResource"
           class="btn btn-sm btn-primary">Add Resource</button>
       </div>
       <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Resource
+        <h4 class="mb-3">Resource {{selectedResource?._id}}
           <button
             @click="toggleView"
             :class="`btn btn-sm ${toggleBtnClass}`">
             {{isDetailView ? 'Update' : 'Detail'}}</button>
         </h4>
-        <resource-detail v-if="isDetailView" />
+        <resource-detail
+          v-if="isDetailView"
+          :resource="selectedResource" />
         <resource-update v-else />
       </div>
     </div>
@@ -44,6 +49,7 @@
     data() {
       return {
         isDetailView: true,
+        selectedResource: null,
         resources: [
           {
             _id: '1',
@@ -100,7 +106,11 @@
           type
         }
 
-        this.resources.unshift(newResource);
+        this.resources.unshift(newResource)
+      },
+      selectResource(selectedResource) {
+        // TODO: it's copied by reference!!!!
+        this.selectedResource = selectedResource
       }
     }
   }
