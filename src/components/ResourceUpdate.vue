@@ -63,12 +63,21 @@ export default {
     return {
       uResource: {...this.resource},
       types: ['blog', 'video', 'book'],
-      alert: this.initAlert()
+      alert: this.initAlert(),
+      timeoutId: null
     }
   },
   emits: ['on-resource-update'],
+  beforeUnmount() {
+    this.clearAlertTimeout()
+  },
   watch: {
-    resource(newResource) {
+    resource(newResource, previousResource) {
+      if (newResource && (newResource._id !== previousResource._id)) {
+        this.clearAlertTimeout()
+        this.alert = this.initAlert()
+      }
+
       this.uResource = { ...newResource }
     }
   },
@@ -76,13 +85,13 @@ export default {
     initAlert() {
       return { success: null, error: null }
     },
+    clearAlertTimeout() {
+      this.timeoutId && clearTimeout(this.timeoutId)
+    },
     setAlert(type, message) {
       this.alert = this.initAlert()
       this.alert[type] = message
-      setTimeout(() => {
-        this.alert = this.initAlert()
-        alert('Calling setTimeout callback!')
-      }, 3000)
+      this.timeoutId = setTimeout(() => this.alert = this.initAlert(), 2000)
     },
     async submitForm() {
       try {
