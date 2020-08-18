@@ -106,9 +106,10 @@
         // TODO: it's copied by reference!!!!
         this.selectedResource = selectedResource
       },
-      hydrateResources(newResources) {
-        console.log('hydrating')
-        console.log(newResources)
+      hydrateResources(newResource) {
+        const index = this.resources.findIndex(r => r._id === newResource._id)
+        this.resources[index] = newResource
+        this.selectResource(newResource)
       }
     }
   }
