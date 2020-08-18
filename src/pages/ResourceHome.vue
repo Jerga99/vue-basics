@@ -29,6 +29,7 @@
           :resource="activeResource" />
         <resource-update
           v-else
+          @on-resource-update="hydrateResources"
           :resource="activeResource" />
       </div>
     </div>
@@ -104,6 +105,10 @@
       selectResource(selectedResource) {
         // TODO: it's copied by reference!!!!
         this.selectedResource = selectedResource
+      },
+      hydrateResources(newResources) {
+        console.log('hydrating')
+        console.log(newResources)
       }
     }
   }

@@ -8,3 +8,9 @@ export function fetchResources() {
     .get('/api/resources')
     .then(res => res.data)
 }
+
+export function updateResource(id, resource) {
+  return axios
+    .patch(`/api/resources/${id}`, resource)
+    .then(res => res.data)
+}

@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { updateResource } from '@/actions'
 export default {
   props: {
     resource: Object
@@ -58,14 +59,16 @@ export default {
       types: ['blog', 'video', 'book']
     }
   },
+  emits: ['on-resource-update'],
   watch: {
     resource(newResource) {
       this.uResource = { ...newResource }
     }
   },
   methods: {
-    submitForm() {
-      alert(JSON.stringify(this.uResource))
+    async submitForm() {
+      const updatedResource = await updateResource(this.uResource._id, this.uResource)
+      this.$emit('on-resource-update', updatedResource)
     }
   }
 }
