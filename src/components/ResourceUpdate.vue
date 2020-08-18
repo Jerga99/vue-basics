@@ -3,6 +3,9 @@
     <div v-if="alert?.success" class="alert alert-success">
       {{alert.success}}
     </div>
+    <div v-if="alert?.error" class="alert alert-danger">
+      {{alert.error}}
+    </div>
     <div class="mb-3">
       <label htmlFor="firstName">Title</label>
       <input
@@ -60,10 +63,7 @@ export default {
     return {
       uResource: {...this.resource},
       types: ['blog', 'video', 'book'],
-      alert: {
-        success: null,
-        error: null
-      }
+      alert: this.initAlert()
     }
   },
   emits: ['on-resource-update'],
@@ -73,11 +73,21 @@ export default {
     }
   },
   methods: {
+    initAlert() {
+      return { success: null, error: null }
+    },
+    setAlert(type, message) {
+      this.alert = this.initAlert()
+      this.alert[type] = message
+    },
     async submitForm() {
-      this.alert = { success: null, error: null }
-      const updatedResource = await updateResource(this.uResource._id, this.uResource)
-      this.$emit('on-resource-update', updatedResource)
-      this.alert.success = 'Resources was updated!'
+      try {
+        const updatedResource = await updateResource(this.uResource._id, this.uResource)
+        this.$emit('on-resource-update', updatedResource)
+        this.setAlert('success', 'Resource was updated!')
+      } catch (error) {
+        this.setAlert('error', error?.message)
+      }
     }
   }
 }
