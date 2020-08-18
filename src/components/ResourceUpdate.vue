@@ -28,6 +28,18 @@
           placeholder="Username" />
       </div>
     </div>
+    <div class="mb-3">
+      <label htmlFor="link">Type</label>
+      <select
+        class="form-control"
+        id="link"
+        v-model="uResource.type" >
+        <option
+          v-for="resourceType in types"
+          :key="resourceType"
+          :value="resourceType">{{resourceType}}</option>
+      </select>
+    </div>
     <hr class="mb-4" />
     <button
       class="btn btn-primary btn-lg btn-block"
@@ -42,7 +54,8 @@ export default {
   },
   data() {
     return {
-      uResource: {...this.resource}
+      uResource: {...this.resource},
+      types: ['blog', 'video', 'book']
     }
   },
   watch: {
