@@ -21,8 +21,9 @@
         <h4 class="mb-3">Resource {{activeResource?._id}}
           <button
             @click="toggleView"
-            :class="`btn btn-sm ${toggleBtnClass}`">
+            :class="`btn btn-sm ${toggleBtnClass} mr-2`">
             {{isDetailView ? 'Update' : 'Detail'}}</button>
+          <resource-delete :activeId="activeResource?._id" />
         </h4>
         <resource-detail
           v-if="isDetailView"
@@ -42,6 +43,7 @@
   import ResourceList from '@/components/ResourceList'
   import ResourceUpdate from '@/components/ResourceUpdate'
   import ResourceDetail from '@/components/ResourceDetail'
+  import ResourceDelete from '@/components/ResourceDelete'
   import { fetchResources } from '@/actions'
   export default {
     components: {
@@ -49,7 +51,8 @@
       ResourceSearch,
       ResourceList,
       ResourceUpdate,
-      ResourceDetail
+      ResourceDetail,
+      ResourceDelete
     },
     data() {
       return {
