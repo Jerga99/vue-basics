@@ -79,14 +79,18 @@ export default {
     setAlert(type, message) {
       this.alert = this.initAlert()
       this.alert[type] = message
+      setTimeout(() => {
+        this.alert = this.initAlert()
+        alert('Calling setTimeout callback!')
+      }, 3000)
     },
     async submitForm() {
       try {
         const updatedResource = await updateResource(this.uResource._id, this.uResource)
         this.$emit('on-resource-update', updatedResource)
         this.setAlert('success', 'Resource was updated!')
-      } catch (error) {
-        this.setAlert('error', error?.message)
+      } catch (errorMessage) {
+        this.setAlert('error', errorMessage)
       }
     }
   }

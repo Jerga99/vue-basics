@@ -11,6 +11,7 @@ export function fetchResources() {
 
 export function updateResource(id, resource) {
   return axios
-    .patch(`/api/resources/${id}as7d6d8a6sd8ad6778asd678a`, resource)
+    .patch(`/api/resources/${id}`, resource)
     .then(res => res.data)
+    .catch(error => Promise.reject(error?.response?.data))
 }
