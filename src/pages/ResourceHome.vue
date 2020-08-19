@@ -51,7 +51,8 @@
   import ResourceUpdate from '@/components/ResourceUpdate'
   import ResourceDetail from '@/components/ResourceDetail'
   import ResourceDelete from '@/components/ResourceDelete'
-  import { fetchResources, searchResources } from '@/actions'
+  import { searchResources } from '@/actions'
+  import useResources from '@/composition/useResources'
   export default {
     components: {
       ResourceSearch,
@@ -63,12 +64,12 @@
     data() {
       return {
         isDetailView: true,
-        selectedResource: null,
-        resources: []
+        selectedResource: null
       }
     },
-    created() {
-      this.getResources()
+    // It's called before "beforeCreate" lifecycle function
+    setup() {
+      return { ...useResources() }
     },
     computed: {
       resourcesLength() {
@@ -85,10 +86,6 @@
       }
     },
     methods: {
-      async getResources() {
-        const resources = await fetchResources()
-        this.resources = resources
-      },
       toggleView() {
         this.isDetailView = !this.isDetailView
       },
