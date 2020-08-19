@@ -5,7 +5,9 @@
         <span class="text-muted">Your Resources</span>
         <span class="badge badge-secondary badge-pill">{{resourcesLength}}</span>
       </h4>
-      <resource-search />
+      <resource-search
+        @on-search="handleSearch"
+      />
       <resource-list
         :resources="resources"
         :activeId="activeResource?._id"
@@ -49,7 +51,7 @@
   import ResourceUpdate from '@/components/ResourceUpdate'
   import ResourceDetail from '@/components/ResourceDetail'
   import ResourceDelete from '@/components/ResourceDelete'
-  import { fetchResources } from '@/actions'
+  import { fetchResources, searchResources } from '@/actions'
   export default {
     components: {
       ResourceSearch,
@@ -65,9 +67,8 @@
         resources: []
       }
     },
-    async created() {
-      const resources = await fetchResources()
-      this.resources = resources
+    created() {
+      this.getResources()
     },
     computed: {
       resourcesLength() {
@@ -84,12 +85,23 @@
       }
     },
     methods: {
+      async getResources() {
+        const resources = await fetchResources()
+        this.resources = resources
+      },
       toggleView() {
         this.isDetailView = !this.isDetailView
       },
       selectResource(selectedResource) {
         // TODO: it's copied by reference!!!!
         this.selectedResource = selectedResource
+      },
+      async handleSearch(title) {
+        if (!title) {
+          this.getResources()
+        }
+
+        this.resources = await searchResources(title)
       },
       hydrateResources(newResource, operation) {
         const index = this.resources.findIndex(r => r._id === newResource._id)
