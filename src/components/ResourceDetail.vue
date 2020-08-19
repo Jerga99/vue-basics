@@ -17,11 +17,7 @@
         target="_blank"
         :href="resource.link"
         class="btn btn-outline-primary mr-2">Resource Link</a>
-      <router-link
-        class="btn btn-outline-success"
-        :to="{name: 'resourceDetailPage', params: {id: resource._id}}">
-        See detail page
-      </router-link>
+      <slot></slot>
     </div>
   </div>
 </template>

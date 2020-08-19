@@ -5,7 +5,13 @@
 
 
 <template>
-  <resource-detail :resource="resource" />
+  <resource-detail :resource="resource">
+    <button
+      @click="$router.go(-1)"
+      class="btn btn-outline-success">
+      Back
+    </button>
+  </resource-detail>
 </template>
 
 <script>
