@@ -72,14 +72,8 @@
       return { ...useResources() }
     },
     computed: {
-      resourcesLength() {
-        return this.resources.length
-      },
       toggleBtnClass() {
         return this.isDetailView ? 'btn-warning' : 'btn-primary'
-      },
-      hasResources() {
-        return this.resourcesLength > 0
       },
       activeResource() {
         return this.selectedResource || (this.hasResources && this.resources[0]) || null

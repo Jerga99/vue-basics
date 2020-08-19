@@ -1,5 +1,5 @@
 
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { fetchResources } from '@/actions'
 
 export default function useResources() {
@@ -11,8 +11,13 @@ export default function useResources() {
 
   onMounted(getResources)
 
+  const resourcesLength = computed(() => resources.value.length)
+  const hasResources = computed(() => resourcesLength.value > 0)
+
   return {
     resources,
-    getResources
+    getResources,
+    resourcesLength,
+    hasResources
   }
 }
