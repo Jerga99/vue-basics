@@ -13,19 +13,18 @@
           :activeId="activeResource?._id"
           @on-item-click="selectResource"
         />
-        <button
-          @click="addResource"
-          class="btn btn-sm btn-primary">Add Resource</button>
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Resource {{activeResource?._id}}
-          <button
-            @click="toggleView"
-            :class="`btn btn-sm ${toggleBtnClass} mr-2`">
-            {{isDetailView ? 'Update' : 'Detail'}}</button>
-          <resource-delete
-            @on-resource-delete="hydrateResources($event, 'delete')"
-            :activeId="activeResource?._id" />
+          <template v-if="hasResources">
+            <button
+              @click="toggleView"
+              :class="`btn btn-sm ${toggleBtnClass} mr-2`">
+              {{isDetailView ? 'Update' : 'Detail'}}</button>
+            <resource-delete
+              @on-resource-delete="hydrateResources($event, 'delete'); !hasResources ? isDetailView = true : null "
+              :activeId="activeResource?._id" />
+          </template>
         </h4>
         <resource-detail
           v-if="isDetailView"
@@ -63,49 +62,27 @@
         resources: []
       }
     },
-    // created is called once options are resolved(data, computed, methods...) and instance created
     async created() {
       const resources = await fetchResources()
       this.resources = resources
     },
     computed: {
-      // it will be re-evaluated every time reactive dependency will change
       resourcesLength() {
-        console.log('Calling computed property')
         return this.resources.length
       },
       toggleBtnClass() {
         return this.isDetailView ? 'btn-warning' : 'btn-primary'
       },
-      hasResource() {
+      hasResources() {
         return this.resourcesLength > 0
       },
       activeResource() {
-        return this.selectedResource || (this.hasResource && this.resources[0]) || null
+        return this.selectedResource || (this.hasResources && this.resources[0]) || null
       }
     },
     methods: {
-      // it will be re-evaluated every
-      getResourceLength() {
-        console.log('Calling a method')
-        return this.resources.length
-      },
       toggleView() {
         this.isDetailView = !this.isDetailView
-      },
-      addResource() {
-        const rnd = Math.random();
-        const _id = '_' + rnd.toString(36).slice(2)
-        const type = ['book', 'blog', 'video'][Math.floor(rnd * 3)]
-        const newResource = {
-          _id,
-          title: `Resource ${_id} Title`,
-          description: `Resource ${_id} Description`,
-          link: ``,
-          type
-        }
-
-        this.resources.unshift(newResource)
       },
       selectResource(selectedResource) {
         // TODO: it's copied by reference!!!!
