@@ -9,6 +9,12 @@ export function fetchResources() {
     .then(res => res.data)
 }
 
+export function fetchResourceByIdApi(resourceId) {
+  return axios
+    .get(`/api/resources/${resourceId}`)
+    .then(res => res.data)
+}
+
 export function createResourceApi(resource) {
   return axios
     .post('/api/resources', resource)
