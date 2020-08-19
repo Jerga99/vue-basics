@@ -22,7 +22,7 @@
             :class="`btn btn-sm ${toggleBtnClass} mr-2`">
             {{isDetailView ? 'Update' : 'Detail'}}</button>
           <resource-delete
-            @on-resource-delete="hydrateResources($event, 'delete'); !hasResources ? isDetailView = true : null "
+            @on-resource-delete="handleResourceChange($event, 'delete'); !hasResources ? isDetailView = true : null "
             :activeId="activeResource?._id" />
         </template>
       </h4>
@@ -39,7 +39,7 @@
       </resource-detail>
       <resource-update
         v-else
-        @on-resource-update="hydrateResources($event, 'update')"
+        @on-resource-update="handleResourceChange($event, 'update')"
         :resource="activeResource" />
     </div>
   </div>
@@ -96,16 +96,10 @@
         this.resources = await searchResources(title)
         this.selectedResource = null
       },
-      hydrateResources(newResource, operation) {
-        const index = this.resources.findIndex(r => r._id === newResource._id)
-
-        if (operation === 'update') {
-          this.resources[index] = newResource
-          this.selectResource(newResource)
-        } else {
-          this.resources.splice(index, 1)
-          this.selectResource(this.resources[0] || null)
-        }
+      handleResourceChange(newResource, operation) {
+        this.hydrateResources(newResource, operation)
+        const resourceToSelect = operation === 'update' ? newResource : this.resources[0] || null
+        this.selectResource(resourceToSelect)
       }
     }
   }
