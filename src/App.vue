@@ -1,15 +1,16 @@
 
 
 <template>
-  <resource-home />
+  <div class="container">
+    <resource-header />
+    <router-view />
+  </div>
 </template>
 
 <script>
-  import ResourceHome from './pages/ResourceHome';
+  import ResourceHeader from '@/components/Header'
   export default {
-    components: {
-      ResourceHome
-    }
+    components: { ResourceHeader }
   }
 </script>
 
