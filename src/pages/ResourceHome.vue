@@ -99,9 +99,11 @@
       async handleSearch(title) {
         if (!title) {
           this.getResources()
+          return;
         }
 
         this.resources = await searchResources(title)
+        this.selectedResource = null
       },
       hydrateResources(newResource, operation) {
         const index = this.resources.findIndex(r => r._id === newResource._id)

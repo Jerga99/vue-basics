@@ -1,5 +1,11 @@
 <template>
+  <div v-if="!resource?._id" class="card">
+    <div class="card-body">
+      No Resource is selected :(
+    </div>
+  </div>
   <resource-form
+    v-else
     :alert="alert"
     :resource="resource"
     @on-form-submit="updateResource" />
@@ -21,7 +27,7 @@ export default {
   },
   watch: {
     resource(newResource, previousResource) {
-      if (newResource && (newResource._id !== previousResource._id)) {
+      if (newResource?._id !== previousResource?._id) {
         this.clearAlertTimeout()
         this.alert = this.initAlert()
       }
