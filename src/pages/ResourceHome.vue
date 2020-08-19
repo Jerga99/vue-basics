@@ -27,11 +27,13 @@
       <resource-detail
         v-if="isDetailView"
         :resource="activeResource">
-        <router-link
-          class="btn btn-outline-success"
-          :to="{name: 'resourceDetailPage', params: {id: activeResource?._id}}">
-          See detail page
-        </router-link>
+        <template #buttonLink>
+          <router-link
+            class="btn btn-outline-success"
+            :to="{name: 'resourceDetailPage', params: {id: activeResource?._id}}">
+            See detail page
+          </router-link>
+        </template>
       </resource-detail>
       <resource-update
         v-else
