@@ -1,5 +1,5 @@
 <template>
-Welcome, {{user.name}}
+Welcome user, {{user.name}}
 </template>
 
 <script>

@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "2",
+    "title": "Updated Title",
+    "description": "Some Desc UPDATE",
+    "link": "https://eincode.com/blogs/learn-how-to-validate-custom-input-components-with-react-hook-form",
+    "type": "blog"
+  },
+  {
+    "_id": "_6yj727pqb",
+    "title": "Resource 1",
+    "description": "Resource 1",
+    "link": "Resource 1",
+    "type": "book"
+  }
+]

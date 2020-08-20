@@ -1,7 +1,7 @@
 <template>
   <div v-if="!resource?._id" class="card">
     <div class="card-body">
-      No Resource is selected :(
+      No Resource is selected  :(
     </div>
   </div>
   <resource-form

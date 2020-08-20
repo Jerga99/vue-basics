@@ -3,7 +3,7 @@
 <template>
   <form>
     <div class="mb-3">
-      <label htmlFor="fontSize">Font Size</label>
+      <label htmlFor="fontSize">Font Size:</label>
       <input
         :value="fontSize"
         @input="handleChange"
@@ -14,7 +14,7 @@
         placeholder="17" />
     </div>
     <div class="mb-3">
-      <label htmlFor="theme">Theme</label>
+      <label htmlFor="theme">Theme:</label>
       <select
         :value="theme"
         @change="handleChange"

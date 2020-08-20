@@ -71,7 +71,6 @@
         selectedResource: null
       }
     },
-    // It's called before "beforeCreate" lifecycle function
     setup() {
       return { ...useResources() }
     },
@@ -88,7 +87,6 @@
         this.isDetailView = !this.isDetailView
       },
       selectResource(selectedResource) {
-        // TODO: it's copied by reference!!!!
         this.selectedResource = selectedResource
       },
       async handleSearch(title) {

@@ -33,10 +33,7 @@ export default {
   methods: {
     onItemClick(resource) {
       this.$emit('on-item-click', resource)
-    },
-    // activeItemClass(resource) {
-    //   return resource._id === this.activeId ? 'is-active' : ''
-    // }
+    }
   }
 }
 </script>

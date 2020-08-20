@@ -11,7 +11,7 @@
             <user-panel />
           </template>
           <template #fallback>
-            Loading....
+            Loading......
           </template>
         </suspense>
       </div>
