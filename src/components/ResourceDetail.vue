@@ -4,7 +4,7 @@
       No Resource is selected :(
     </div>
   </div>
-  <div v-else class="card">
+  <div v-else :class="`card ${getTheme()}`">
     <div class="card-header">
       {{resource.title}}
     </div>
@@ -29,6 +29,14 @@ export default {
       validator: prop => typeof prop === 'object' || prop === null,
       required: true
     }
-  }
+  },
+  inject: ['getTheme']
 }
 </script>
+
+<style>
+  .card.dark {
+    color: black;
+  }
+</style>
+
