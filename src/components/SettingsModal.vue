@@ -11,23 +11,41 @@
     @on-submit="submitSettings"
   >
   <div>
-    My custom content
+    <SettingsForm
+      v-model:fontSize="fontSize"
+      v-model:theme="theme" />
   </div>
   </modal>
 </template>
 
 
 <script>
+
+// <SettingsForm
+//   :fontSize="fontSize"
+//   :theme="theme"
+//   @update:fontSize="fontSize = $event"
+//   @update:theme="theme = $event" />
+
+
 import Modal from '@/components/shared/Modal'
+import SettingsForm from '@/components/SettingsForm'
 export default {
-  components: { Modal },
+  components: { Modal, SettingsForm },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
+      fontSize: '',
+      theme: ''
     }
   },
   methods: {
     submitSettings() {
+      const settings = {
+        fontSize: this.fontSize,
+        theme: this.theme
+      }
+      alert(JSON.stringify(settings))
       this.isOpen = false
     }
   }
