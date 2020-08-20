@@ -4,16 +4,18 @@
 
 <template>
   <div class="py-5 text-center">
-    <div class="user-container">
-      <suspense>
-        <template #default>
-          <user-panel />
-        </template>
-        <template #fallback>
-          Loading....
-        </template>
-      </suspense>
-    </div>
+    <teleport to="#teleportContent">
+      <div class="user-container">
+        <suspense>
+          <template #default>
+            <user-panel />
+          </template>
+          <template #fallback>
+            Loading....
+          </template>
+        </suspense>
+      </div>
+    </teleport>
     <img height="150" src="../assets/logo.png" />
     <h2>Keep Resources</h2>
     <p class="lead">Keep your resource at once place</p>
